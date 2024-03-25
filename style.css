@@ -165,7 +165,28 @@ header .profile{
     top: 0;
 }
 
-.modals div:nth-child(1){
+.modals .btn_close_modal{
+    height: 50vh;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.modals .btn_close_modal .fa-times{
+    padding: 7px;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.modals .btn_close_modal .fa-times:hover{
+    opacity: 60%;
+    cursor: pointer;
+}
+
+.modals .modal_agendar{
     width: calc(35vw + 10px);
     height: 50vh;
     display: flex;
@@ -175,7 +196,7 @@ header .profile{
     border-radius: 8px;
 }
 
-.modals div .eqps_dispo{
+.modals .modal_agendar .eqps_dispo{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -186,11 +207,11 @@ header .profile{
     overflow-y: auto;
 }
 
-.modals div .eqps_dispo .eqp:nth-child(1){
+.modals .modal_agendar .eqps_dispo .eqp:nth-child(1){
     margin-top: 10px;
 }
 
-.modals div .eqps_dispo .eqp{
+.modals .modal_agendar .eqps_dispo .eqp{
     width: 70%;
     height: 35px;
     cursor: pointer;
@@ -200,19 +221,19 @@ header .profile{
     font-size: 1.2rem;
 }
 
-.modals div .eqps_dispo .eqp .fas{
+.modals .modal_agendar .eqps_dispo .eqp .fas{
     font-size: 1.5rem;
     padding-right: 5px;
 }
 
-.modals div .control{
+.modals .modal_agendar .control{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.modals div .control button{
+.modals .modal_agendar .control button{
     width: calc(10vw + 10px);
     height: 30px;
     border-radius: 8px;

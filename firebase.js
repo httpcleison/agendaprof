@@ -22,11 +22,25 @@ let login_dados = []
 let eqps_dispos = []
 let equipamentos= ["projetor01", "projetor02", "projetor03"]
 
+function destroyModals(){
+    if(document.querySelector(".modals")){
+        document.querySelector(".modals").innerHTML = ""
+        document.querySelector(".modals").remove()
+    }
+}
+
+function newModal(type){
+    document.querySelector("body").innerHTML += '<div class="modals"><div class="btn_close_modal"><span class="fas fa-times"></span></div><div class="modal_agendar"><div class="eqps_dispo"></div><div class="control"><button class="btn_agendar">agendar</button></div></div></div>';
+}
+
 function renderEqpsDispos(day){
+    let eqpSelect
+    document.querySelector(".modals div .eqps_dispo").innerHTML = ""
+    eqps_dispos = []
     onValue(dbRef(database, "semana/"+day), async (snapshot) => {
         // await console.log(snapshot.val())
         let equipamentos_do_dia = snapshot.val()
-        let eqpSelect
+        // let eqpSelect
 
         for(let chave in equipamentos_do_dia){
             if(equipamentos_do_dia.hasOwnProperty(chave)){
@@ -47,13 +61,6 @@ function renderEqpsDispos(day){
                 eqp.style.color = "white"
                 console.log(eqpSelect)
             })
-
-            // document.querySelector(".modals div .control .btn_agendar").addEventListener("click", ()=>{
-            //     console.log("semana/"+day+"/"+eqpSelect)
-            //     // get(dbRef(database, "semana/"+day+"/"+eqpSelect), (snapshot)=>{
-            //     //     alert()
-            //     // })
-            // })
         })
 
         document.querySelector(".modals div .control .btn_agendar").addEventListener("click", ()=>{
@@ -68,8 +75,13 @@ function renderEqpsDispos(day){
         })
         
     })
+
+    document.querySelector(".modals .btn_close_modal").addEventListener("click", ()=>{
+        destroyModals()
+    })
 }
 
+//mostrar equipamentos que estão agendados
 function renderSquareMainEqps(day){
     get(dbRef(database, "semana/"+day)).then((snapshot)=>{
         let equipamentos = snapshot.val()
@@ -103,8 +115,16 @@ document.querySelector(".modal-login div button").addEventListener("click", ()=>
     })
 })
 
-document.querySelector(".fa-plus-square").addEventListener("click", ()=>{
+function callFunctionsAddAgenda(){
     newModal("disponiveis")
-    // document.querySelector(".modals div .eqps_dispo").innerHTML += '<div class="eqp"><span><span class="fas fa-laptop"></span> Projetor01 - Leticia - 1DS</span></div>'
     renderEqpsDispos("segunda")
-})
+}
+
+// document.querySelector(".fa-plus-square").addEventListener("click", callFunctionsAddAgenda)
+// document.querySelector(".fa-plus-square").onclick = callFunctionsAddAgenda;
+
+document.addEventListener("click", function(event) {
+    if (event.target.matches(".fa-plus-square")) {
+        callFunctionsAddAgenda();
+    }
+});

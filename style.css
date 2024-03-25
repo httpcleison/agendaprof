@@ -1,0 +1,223 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    width: 100vw;
+    height: 7vh;
+    background-color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+header .profile{
+    font-size: 1.8rem;
+    margin-left: 10px;
+}
+
+
+/*  */
+
+
+.container{
+    width: 100vw;
+    height: 93vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .week{
+    width: calc(60vw - 30px);
+    height: 80%;
+    /* background-color: blueviolet; */
+    border: 0.5px solid black;
+}
+
+/* .container .week{} */
+
+.container .week .controls{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+}
+
+.container .week .controls span:hover{
+    opacity: 60%;
+    cursor: pointer;
+}
+
+.container .week .controls .day_of_week{
+    margin: 10px 0 10px 10px;
+}
+
+.container .week .controls .controls_operations{
+    display: flex;
+    gap: 15px;
+    margin:  10px 10px 10px 0;
+}
+
+.container .week .controls .controls_operations div{
+    
+}
+
+/* .container .week .controls .filter{
+    margin: 10px 10px 10px 0;
+}
+
+.container .week .controls .filter{
+    margin: 10px 10px 10px 0;
+} */
+
+.container .week .eqps{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+
+    overflow-x: scroll;
+}
+
+.container .week .eqps .eqp{
+    width: 60%;
+    height: 35px;
+    cursor: pointer;
+    background-color: #999;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.container .week .eqps .eqp span{
+    font-size: 1.2rem;
+}
+
+.container .week .eqps .eqp span .fas{
+    font-size: 1.5rem;
+    padding-right: 5px;
+}
+
+/*  */
+
+.modal-login{
+    width: 100vw;
+    height: 100vh;
+    /* background-color: rgba(0, 0, 0, 0.384); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 999;
+    background-color: rgba(26, 26, 26, 0.87);
+    flex-shrink: 0;
+    left: 0;
+    top: 0;
+}
+
+.modal-login div{
+    padding: 12px;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.modal-login div input{
+    width: calc(20vw + 10px);
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.modal-login div button{
+    width: calc(10vw + 10px);
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: rgb(173, 236, 173);
+}
+
+/*  */
+/* <div class="eqp"><span><span class="fas fa-laptop"></span> Projetor01 - Leticia - 1DS</span></div> */
+
+.modals{
+    width: 100vw;
+    height: 100vh;
+    /* background-color: rgba(0, 0, 0, 0.384); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 999;
+    background-color: rgba(26, 26, 26, 0.87);
+    flex-shrink: 0;
+    left: 0;
+    top: 0;
+}
+
+.modals div:nth-child(1){
+    width: calc(35vw + 10px);
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: whitesmoke;
+    border-radius: 8px;
+}
+
+.modals div .eqps_dispo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modals div .eqps_dispo .eqp:nth-child(1){
+    margin-top: 10px;
+}
+
+.modals div .eqps_dispo .eqp{
+    width: 70%;
+    height: 35px;
+    cursor: pointer;
+    background-color: #999;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.modals div .eqps_dispo .eqp .fas{
+    font-size: 1.5rem;
+    padding-right: 5px;
+}
+
+.modals div .control{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modals div .control button{
+    width: calc(10vw + 10px);
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 10px;
+    outline: none;
+    background-color: rgb(173, 236, 173);
+}

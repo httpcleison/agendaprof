@@ -22,16 +22,16 @@ let login_dados = []
 let eqps_dispos = []
 let equipamentos= ["projetor01", "projetor02", "projetor03"]
 
-function destroyModals(){
-    if(document.querySelector(".modals")){
-        document.querySelector(".modals").innerHTML = ""
-        document.querySelector(".modals").remove()
-    }
-}
+// function destroyModals(){
+//     if(document.querySelector(".modals")){
+//         document.querySelector(".modals").innerHTML = ""
+//         document.querySelector(".modals").remove()
+//     }
+// }
 
-function newModal(type){
-    document.querySelector("body").innerHTML += '<div class="modals"><div class="btn_close_modal"><span class="fas fa-times"></span></div><div class="modal_agendar"><div class="eqps_dispo"></div><div class="control"><button class="btn_agendar">agendar</button></div></div></div>';
-}
+// function newModal(type){
+//     document.querySelector("body").innerHTML += '<div class="modals"><div class="btn_close_modal"><span class="fas fa-times"></span></div><div class="modal_agendar"><div class="eqps_dispo"></div><div class="control"><button class="btn_agendar">agendar</button></div></div></div>';
+// }
 
 function renderEqpsDispos(day){
     let eqpSelect
@@ -52,7 +52,7 @@ function renderEqpsDispos(day){
         }
 
         for(let i = 0; i < eqps_dispos.length; i++){
-            document.querySelector(".modals div .eqps_dispo").innerHTML += '<div class="eqp"><span><span class="fas fa-laptop"></span>'+eqps_dispos[i]+'</span></div>'
+            document.querySelector(".modals div .eqps_dispo").innerHTML += '<div class="eqp"><span><span class="'+equipamentos_do_dia[eqps_dispos[i]].icone+'"></span>'+eqps_dispos[i]+'</span></div>'
         }
 
         document.querySelectorAll(".modals div .eqps_dispo .eqp").forEach((eqp)=>{
@@ -76,9 +76,9 @@ function renderEqpsDispos(day){
         
     })
 
-    document.querySelector(".modals .btn_close_modal").addEventListener("click", ()=>{
-        destroyModals()
-    })
+    // document.querySelector(".modals .btn_close_modal").addEventListener("click", ()=>{
+    //     destroyModals()
+    // })
 }
 
 //mostrar equipamentos que estão agendados
@@ -93,7 +93,7 @@ function renderSquareMainEqps(day){
         Object.keys(equipamentos).forEach(chave => {
             const equipamento = equipamentos[chave];
             if(equipamento.dispo == false){
-                document.querySelector(".container .week .eqps").innerHTML += '<div class="eqp"><span><span class="fas fa-laptop"></span>'+ equipamento.nome +'-'+ equipamento.professor +'-'+ equipamento.turma +'-'+ equipamento.aula+'</span></div>'
+                document.querySelector(".container .week .eqps").innerHTML += '<div class="eqp"><span><span class="'+equipamento.icone+'"></span>'+ equipamento.nome +'-'+ equipamento.professor +'-'+ equipamento.turma +'-'+ equipamento.aula+'</span></div>'
             }
         });
     })
@@ -106,6 +106,8 @@ document.querySelector(".modal-login div button").addEventListener("click", ()=>
                 if(document.querySelector(".modal-login .setPassword").value === snapshot.val().password){
                     login_dados[0] = snapshot.val().username
                     login_dados[1] = snapshot.val().password
+                    login_dados[2] = snapshot.val().cargo
+                    login_dados[3] = snapshot.val().desde
                     document.querySelector(".modal-login").style.display = "none"
                     renderSquareMainEqps("segunda")
                 }
@@ -120,11 +122,13 @@ function callFunctionsAddAgenda(){
     renderEqpsDispos("segunda")
 }
 
-// document.querySelector(".fa-plus-square").addEventListener("click", callFunctionsAddAgenda)
-// document.querySelector(".fa-plus-square").onclick = callFunctionsAddAgenda;
-
 document.addEventListener("click", function(event) {
     if (event.target.matches(".fa-plus-square")) {
         callFunctionsAddAgenda();
+    }else if(event.target.matches(".fa-user-circle")){
+        newModal("conta")
+        document.querySelector(".modals .conta-popup .dates").innerHTML += '<h3>'+login_dados[0]+'</h3><p>cargo: '+login_dados[2]+' | desde de: '+login_dados[3]+'</p>'
     }
 });
+
+//colocar sistema de icone pra enviar/agendar!

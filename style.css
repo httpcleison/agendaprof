@@ -61,28 +61,27 @@ header .profile{
     margin:  10px 10px 10px 0;
 }
 
-.container .week .controls .controls_operations div{
-    
+.container .week .controls .controls_operations div{}
+
+.container .week .info{
+    width: 100%;
+    height: 35px;
 }
 
-/* .container .week .controls .filter{
-    margin: 10px 10px 10px 0;
+.container .week .info span{
+    margin-left: 30px;
 }
-
-.container .week .controls .filter{
-    margin: 10px 10px 10px 0;
-} */
 
 .container .week .eqps{
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     gap: 15px;
 
-    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 .container .week .eqps .eqp{
@@ -186,7 +185,7 @@ header .profile{
     cursor: pointer;
 }
 
-.modals .modal_agendar{
+.modals .modal_agendar, .conta-popup{
     width: calc(35vw + 10px);
     height: 50vh;
     display: flex;
@@ -196,6 +195,7 @@ header .profile{
     border-radius: 8px;
 }
 
+/* pop-up agendar */
 .modals .modal_agendar .eqps_dispo{
     display: flex;
     flex-direction: column;
@@ -241,4 +241,32 @@ header .profile{
     margin-bottom: 10px;
     outline: none;
     background-color: rgb(173, 236, 173);
+}
+
+/* pop-up conta */
+.modals .conta-popup span{
+    font-size: 1rem;
+    margin: 10px;
+}
+
+.modals .conta-popup .infos{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.modals .conta-popup .infos .profile{
+    width: 80px;
+    height: 80px;
+    background-color: black;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.modals .conta-popup .infos .dates{
+    background-color: rgb(216, 216, 216);
+    padding: 10px;
 }

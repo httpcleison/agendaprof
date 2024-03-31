@@ -20,27 +20,19 @@ const database = getDatabase(app)
 
 let login_dados = []
 let eqps_dispos = []
-let equipamentos= ["projetor01", "projetor02", "projetor03"]
-
-// function destroyModals(){
-//     if(document.querySelector(".modals")){
-//         document.querySelector(".modals").innerHTML = ""
-//         document.querySelector(".modals").remove()
-//     }
-// }
-
-// function newModal(type){
-//     document.querySelector("body").innerHTML += '<div class="modals"><div class="btn_close_modal"><span class="fas fa-times"></span></div><div class="modal_agendar"><div class="eqps_dispo"></div><div class="control"><button class="btn_agendar">agendar</button></div></div></div>';
-// }
+// let equipamentos= ["projetor01", "projetor02", "projetor03"]
+let day_of_week_selected
 
 function renderEqpsDispos(day){
     let eqpSelect
     document.querySelector(".modals div .eqps_dispo").innerHTML = ""
     eqps_dispos = []
+    day_of_week_selected = document.querySelector(".container .week .controls .day_of_week span").textContent.trim().toLowerCase().split("-")[0]
+
+    day = day_of_week_selected
+
     onValue(dbRef(database, "semana/"+day), async (snapshot) => {
-        // await console.log(snapshot.val())
         let equipamentos_do_dia = snapshot.val()
-        // let eqpSelect
 
         for(let chave in equipamentos_do_dia){
             if(equipamentos_do_dia.hasOwnProperty(chave)){
@@ -63,11 +55,20 @@ function renderEqpsDispos(day){
             })
         })
 
+        //enviar agendamento
         document.querySelector(".modals div .control .btn_agendar").addEventListener("click", ()=>{
             // console.log("semana/"+day+"/"+eqpSelect)
             get(dbRef(database, "semana/"+day+"/"+eqpSelect)).then((snapshot)=>{
                 if(snapshot.val().dispo !== false){
-                    let date_agenda = {"professor": login_dados[0], "turma": "teste", "dispo": false, "aula": "aula01", "nome": eqpSelect}
+                    let icon_type_txt
+                    if(eqpSelect.includes("projetor")){
+                        icon_type_txt = "fas fa-laptop"
+                    }else if(eqpSelect.includes("televisao")){
+                        icon_type_txt = "fas fa-tv"
+                    }else if(eqpSelect.includes("caixadesom")){
+                        icon_type_txt = "fas fa-stop"
+                    }
+                    let date_agenda = {"professor": login_dados[0], "turma": "teste", "dispo": false, "aula": "aula01", "nome": eqpSelect, "icone": icon_type_txt}
                     set(dbRef(database, "semana/"+day+"/"+eqpSelect), date_agenda)
                     location.reload()
                 }
@@ -119,7 +120,21 @@ document.querySelector(".modal-login div button").addEventListener("click", ()=>
 
 function callFunctionsAddAgenda(){
     newModal("disponiveis")
-    renderEqpsDispos("segunda")
+    day_of_week_selected = document.querySelector(".container .week .controls .day_of_week span").textContent.trim()
+    // console.log(day_of_week_selected.toLowerCase().split("-")[0])
+    renderEqpsDispos(day_of_week_selected.toLowerCase().split("-")[0])
+}
+
+function selectDayOfWeek(){
+    document.querySelectorAll(".modals .dias-popup .select_week span").forEach((day)=>{
+        day.addEventListener("click", (event)=>{
+            destroyModals()
+            renderSquareMainEqps(event.target.innerText.toLowerCase().split("-")[0])
+            day_of_week_selected = event.target.innerText
+            document.querySelector(".container .week .controls .day_of_week").innerHTML = ""
+            document.querySelector(".container .week .controls .day_of_week").innerHTML = '<span><span class="fas fa-ellipsis-v"></span> '+day_of_week_selected+'</span>'
+        })
+    })
 }
 
 document.addEventListener("click", function(event) {
@@ -128,7 +143,8 @@ document.addEventListener("click", function(event) {
     }else if(event.target.matches(".fa-user-circle")){
         newModal("conta")
         document.querySelector(".modals .conta-popup .dates").innerHTML += '<h3>'+login_dados[0]+'</h3><p>cargo: '+login_dados[2]+' | desde de: '+login_dados[3]+'</p>'
+    }else if(event.target.matches(".day_of_week span")){
+        newModal("dias_da_semana")
+        selectDayOfWeek()
     }
 });
-
-//colocar sistema de icone pra enviar/agendar!
